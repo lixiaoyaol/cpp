@@ -21,6 +21,8 @@ int main()
     mat4.show_data();
     Matrix mat5 = mat1 * 2;
     mat5.show_data();
+    Matrix mat10 = 2 * mat1;
+    mat10.show_data();
     Matrix mat6 = mat1 * mat2;
     mat6.show_data();
 

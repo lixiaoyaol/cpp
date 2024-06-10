@@ -44,6 +44,10 @@ Matrix Matrix::operator*(float a) const {
     return Matrix(rows, cols, new_data);
 }
 
+Matrix operator*(float a, const Matrix &mat) {
+    return mat * a;
+}
+
 Matrix Matrix::operator*(const Matrix &mat) const {
     if(rows != mat.rows || cols != mat.cols){
         throw std::invalid_argument("Matrix dimensions do not match");

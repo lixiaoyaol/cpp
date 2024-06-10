@@ -17,6 +17,7 @@ public:
     Matrix operator+(const Matrix &mat) const;
     Matrix operator-(const Matrix &mat) const;
     Matrix operator*(float a) const;
+    friend Matrix operator*(float a, const Matrix &mat);
     Matrix operator*(const Matrix &mat) const;
 
     ~Matrix();
