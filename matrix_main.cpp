@@ -33,5 +33,8 @@ int main()
     Matrix mat9 = matmul(mat7, mat8);
     mat9.show_data();
 
+    cout << mat9 << endl;
+    cout << mat1 << endl;
+
     return 0;
 }

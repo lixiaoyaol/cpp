@@ -14,6 +14,8 @@ public:
 
     void show_data() const;
 
+    friend std::ostream& operator<<(std::ostream& os, const Matrix mat);
+
     Matrix operator+(const Matrix &mat) const;
     Matrix operator-(const Matrix &mat) const;
     Matrix operator*(float a) const;
