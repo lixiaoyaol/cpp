@@ -18,8 +18,7 @@ std::ostream& operator<<(std::ostream& os, const Matrix mat){
     for(int i=0; i<mat.rows*mat.cols; i++) {
         std::cout << mat.data[i] << " ";
         if((i+1)%mat.cols == 0) {
-            std::cout << std::endl;
-        }
+            std::cout << std::endl;}
     }
     return os;    
 }
