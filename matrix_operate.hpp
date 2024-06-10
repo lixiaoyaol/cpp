@@ -12,8 +12,6 @@ public:
 public:
     Matrix(int rows, int cols, const std::vector<float> &data);
 
-    void show_data() const;
-
     friend std::ostream& operator<<(std::ostream& os, const Matrix mat);
 
     Matrix operator+(const Matrix &mat) const;

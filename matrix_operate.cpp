@@ -5,15 +5,6 @@
 
 Matrix::Matrix(int rows, int cols, const std::vector<float> &data): rows(rows), cols(cols), data(data) {}
 
-void Matrix::show_data() const {
-    for(int i=0; i<rows*cols; i++) {
-        std::cout << data[i] << " ";
-        if((i+1)%cols == 0) {
-            std::cout << std::endl;
-        }
-    }
-}
-
 std::ostream& operator<<(std::ostream& os, const Matrix mat){
     for(int i=0; i<mat.rows*mat.cols; i++) {
         std::cout << mat.data[i] << " ";
