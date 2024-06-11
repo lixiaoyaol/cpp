@@ -83,7 +83,8 @@ Matrix matmul(const Matrix &mata, const Matrix &matb) {
     for(int i=0; i<mata.rows*matb.cols; i++){
         int row = i / matb.cols;
         int col = i % matb.cols;
-        std::vector<float> row_data(mata.data.begin() + row*mata.cols, mata.data.begin() + (row+1)*mata.cols);
+        std::vector<float> row_data(mata.data.begin() + row*mata.cols, 
+                                    mata.data.begin() + (row+1)*mata.cols);
         std::vector<float> col_data;
         for(int j=0; j<matb.rows; j++) {
             col_data.push_back(matb.data[j*matb.cols + col]);
