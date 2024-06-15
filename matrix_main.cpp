@@ -25,7 +25,11 @@ int main()
     Matrix mat9 = matmul(mat7, mat8);
 
     cout << mat9 << endl;
+    cout << mat9.transpose() << endl;
     cout << mat1 << endl;
+    cout << mat1.transpose() << endl;
+    cout << mat2 << endl;
+    cout << mat2.transpose() << endl;
 
     return 0;
 }

@@ -59,6 +59,16 @@ Matrix Matrix::operator*(const Matrix &mat) const {
     return Matrix(rows, cols, new_data);
 }
 
+Matrix Matrix::transpose() const {
+    std::vector<float> new_data(rows*cols);
+    for(int i=0; i<rows*cols; i++) {
+        int row = i / rows;
+        int col = i % rows;
+        new_data[row*rows + col] =  data[col*cols + row];
+    }
+    return Matrix(cols, rows, new_data);
+}
+
 Matrix::~Matrix()
 {
     // std::cout << "hha" << std::endl;

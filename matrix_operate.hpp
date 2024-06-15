@@ -20,6 +20,8 @@ public:
     friend Matrix operator*(float a, const Matrix &mat);
     Matrix operator*(const Matrix &mat) const;
 
+    Matrix transpose() const;
+
     ~Matrix();
 };
 
