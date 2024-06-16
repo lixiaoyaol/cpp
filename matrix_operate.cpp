@@ -3,6 +3,8 @@
 #include<stdexcept>
 #include "matrix_operate.hpp"
 
+
+//Matrix class functions block
 Matrix::Matrix(int rows, int cols, const std::vector<float> &data): rows(rows), cols(cols), data(data) {}
 
 std::ostream& operator<<(std::ostream& os, const Matrix mat){
@@ -73,6 +75,7 @@ Matrix::~Matrix()
 {
     // std::cout << "hha" << std::endl;
 }
+//Matrix class functions end
 
 float vec_dot(const std::vector<float> &vec1, const std::vector<float> &vec2) {
     if(vec1.size() != vec2.size()) {
