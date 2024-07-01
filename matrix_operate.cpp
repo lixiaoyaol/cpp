@@ -1,3 +1,6 @@
+/*Author: libofeng, Mail: bf_li@qq.com
+ *All rights reserved*/
+
 #include<iostream>
 #include<vector>
 #include<stdexcept>
