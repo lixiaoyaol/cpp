@@ -1,2 +1,3 @@
 # CPP Code
-There are some useful functions.
+## Matirx
+- Matrix operate: `+ - *  << ` scale multiply, matrix multiply, transpose
