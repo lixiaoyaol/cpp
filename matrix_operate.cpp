@@ -1,27 +1,27 @@
 /*Author: libofeng, Mail: bf_li@qq.com
  *All rights reserved*/
-
-#include<iostream>
-#include<vector>
-#include<stdexcept>
 #include "matrix_operate.hpp"
 
 
 //Matrix class functions block
-Matrix::Matrix(int rows, int cols, const std::vector<float> &data): rows(rows), cols(cols), data(data) {}
+Matrix::Matrix(int rows, int cols, const std::vector<float> &data): rows(rows), cols(cols), data(data) {
+    if (data.size() != rows*cols) {
+        throw std::invalid_argument("Data size does not match matrix dimensions");
+    }
+}
 
-std::ostream& operator<<(std::ostream& os, const Matrix mat){
+std::ostream& operator<<(std::ostream& os, const Matrix &mat){
     for(int i=0; i<mat.rows*mat.cols; i++) {
-        std::cout << mat.data[i] << " ";
+        os << mat.data[i] << " ";
         if((i+1)%mat.cols == 0) {
-            std::cout << std::endl;}
+            os << std::endl;}
     }
     return os;    
 }
 
 Matrix Matrix::operator+(const Matrix &mat) const {
     if(rows != mat.rows || cols != mat.cols){
-        throw std::invalid_argument("Matrix dimensions do not match");
+        throw std::invalid_argument("Matrix dimensions do not match for addition");
     }
     std::vector<float> new_data(rows*cols);
     for(int i=0; i<rows*cols; i++) {
@@ -32,7 +32,7 @@ Matrix Matrix::operator+(const Matrix &mat) const {
 
 Matrix Matrix::operator-(const Matrix &mat) const {
     if(rows != mat.rows || cols != mat.cols){
-        throw std::invalid_argument("Matrix dimensions do not match");
+        throw std::invalid_argument("Matrix dimensions do not match for substraction");
     }
     std::vector<float> new_data(rows*cols);
     for(int i=0; i<rows*cols; i++) {
@@ -82,7 +82,7 @@ Matrix::~Matrix()
 
 float vec_dot(const std::vector<float> &vec1, const std::vector<float> &vec2) {
     if(vec1.size() != vec2.size()) {
-        throw std::invalid_argument("Vector dimensions do not match");
+        throw std::invalid_argument("Vector dimensions do not match for product");
     }
     float res = 0;
     for(int i=0; i<vec1.size(); i++) {
@@ -93,7 +93,7 @@ float vec_dot(const std::vector<float> &vec1, const std::vector<float> &vec2) {
 
 Matrix matmul(const Matrix &mata, const Matrix &matb) {
     if(mata.cols != matb.rows) {
-        throw std::invalid_argument("Matrix dimensions do not match");
+        throw std::invalid_argument("Matrix dimensions do not match for multiplication");
     }
     std::vector<float> new_data(mata.rows*matb.cols);
     for(int i=0; i<mata.rows*matb.cols; i++){
@@ -102,6 +102,7 @@ Matrix matmul(const Matrix &mata, const Matrix &matb) {
         std::vector<float> row_data(mata.data.begin() + row*mata.cols, 
                                     mata.data.begin() + (row+1)*mata.cols);
         std::vector<float> col_data;
+        col_data.reserve(matb.rows);
         for(int j=0; j<matb.rows; j++) {
             col_data.push_back(matb.data[j*matb.cols + col]);
         }

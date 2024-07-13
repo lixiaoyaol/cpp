@@ -12,8 +12,8 @@ int main()
 {
     cout << "hello world!" << endl;
 
-    vector<float> data = {1, 2, 3, 4, 5, 6};
-    Matrix mat1(2, 3, data);
+    // vector<float> data = {1, 2, 3, 4, 5, 6};
+    // Matrix mat1(2, 3, data);
     // vector<float> data2 = {7, 8, 9, 10, 11, 12};
     // Matrix mat2(2, 3, data2);
     // Matrix mat3 = mat1 + mat2;

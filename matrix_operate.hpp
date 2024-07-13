@@ -4,6 +4,8 @@
 #pragma once
 
 #include<vector>
+#include <iostream>
+#include <stdexcept>
 
 class Matrix
 {
@@ -15,7 +17,7 @@ public:
 public:
     Matrix(int rows, int cols, const std::vector<float> &data);
 
-    friend std::ostream& operator<<(std::ostream& os, const Matrix mat);
+    friend std::ostream& operator<<(std::ostream& os, const Matrix &mat);
 
     Matrix operator+(const Matrix &mat) const;
     Matrix operator-(const Matrix &mat) const;
