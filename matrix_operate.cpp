@@ -74,6 +74,13 @@ Matrix Matrix::transpose() const {
     return Matrix(cols, rows, new_data);
 }
 
+float& Matrix::operator()(int i, int j) {
+    if(i < 0 || i >= rows || j < 0 || j >= cols) {
+        throw std::out_of_range("Matrix index out of range");
+    }
+    return data[i*cols + j];
+}
+
 Matrix::~Matrix()
 {
     // std::cout << "hha" << std::endl;
@@ -171,5 +178,14 @@ Matrix inverse(const Matrix &mat) {
     int n = mat.rows;
     std::vector<float> data(n*n, 0);
     //TODO: not implemented!
+    Matrix mate = eyen(n);
+    Matrix matab = matcat(mat, mate, 1);
+    // for(int i=1; i<n; i++) {
+    //     float elmax = abs(mat)
+    // }
+
+    // std::cout << matab <<std::endl;
+
+
     return Matrix(n, n, data);
 }

@@ -42,9 +42,12 @@ int main()
     // cout << mat2 << endl;
     // cout << matcat(mat1, mat2, 0) << endl;
     // cout << matcat(mat1, mat2, 1) << endl;
-    vector<float> data={1, 2, 3, 5};
+    vector<float> data={1, 2, 3, 4};
     Matrix mat(2, 2, data);
-    cout << trace(mat);
+    // cout << trace(mat);
+    cout << mat(1,1) << endl;
+
+    cout << inverse(mat) << endl;
 
 
     return 0;

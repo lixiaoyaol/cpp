@@ -3,9 +3,10 @@
 
 #pragma once
 
-#include<vector>
+#include <vector>
 #include <iostream>
 #include <stdexcept>
+#include <cmath>
 
 class Matrix
 {
@@ -24,6 +25,7 @@ public:
     Matrix operator*(float a) const;
     friend Matrix operator*(float a, const Matrix &mat);
     Matrix operator*(const Matrix &mat) const;
+    float& operator() (int i, int j);
 
     Matrix transpose() const;
 
