@@ -12,10 +12,10 @@ int main()
 {
     cout << "hello world!" << endl;
 
-    // vector<float> data = {1, 2, 3, 4, 5, 6};
-    // Matrix mat1(2, 3, data);
-    // vector<float> data2 = {7, 8, 9, 10, 11, 12};
-    // Matrix mat2(2, 3, data2);
+    vector<float> data = {1, 2, 3, 4, 5, 6};
+    Matrix mat1(2, 3, data);
+    vector<float> data2 = {7, 8, 9, 10, 11, 12};
+    Matrix mat2(2, 3, data2);
     // Matrix mat3 = mat1 + mat2;
     // Matrix mat4 = mat1 - mat2;
     // Matrix mat5 = mat1 * 2;
@@ -33,8 +33,16 @@ int main()
     // cout << mat1.transpose() << endl;
     // cout << mat2 << endl;
     // cout << mat2.transpose() << endl;
-    Matrix mat11 = mat1;
-    cout << mat11 << endl;
+    // Matrix mat11 = mat1;
+    // cout << mat11 << endl;
+
+    // Matrix mat = eyen(5);
+    // cout << mat << endl;
+    cout << mat1 << endl;
+    cout << mat2 << endl;
+    cout << matcat(mat1, mat2, 0) << endl;
+    cout << matcat(mat1, mat2, 1) << endl;
+
 
     return 0;
 }

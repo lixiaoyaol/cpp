@@ -6,7 +6,7 @@
 //Matrix class functions block
 Matrix::Matrix(int rows, int cols, const std::vector<float> &data): rows(rows), cols(cols), data(data) {
     if (data.size() != rows*cols) {
-        throw std::invalid_argument("Data size does not match matrix dimensions");
+        throw std::invalid_argument("Data size does not match matrix dimensions for construction");
     }
 }
 
@@ -55,7 +55,7 @@ Matrix operator*(float a, const Matrix &mat) {
 
 Matrix Matrix::operator*(const Matrix &mat) const {
     if(rows != mat.rows || cols != mat.cols){
-        throw std::invalid_argument("Matrix dimensions do not match");
+        throw std::invalid_argument("Matrix dimensions do not match for matrix element multiplication");
     }
     std::vector<float> new_data(rows*cols);
     for(int i=0; i<rows*cols; i++) {
@@ -82,7 +82,7 @@ Matrix::~Matrix()
 
 float vec_dot(const std::vector<float> &vec1, const std::vector<float> &vec2) {
     if(vec1.size() != vec2.size()) {
-        throw std::invalid_argument("Vector dimensions do not match for product");
+        throw std::invalid_argument("Vector dimensions do not match for vector product");
     }
     float res = 0;
     for(int i=0; i<vec1.size(); i++) {
@@ -93,7 +93,7 @@ float vec_dot(const std::vector<float> &vec1, const std::vector<float> &vec2) {
 
 Matrix matmul(const Matrix &mata, const Matrix &matb) {
     if(mata.cols != matb.rows) {
-        throw std::invalid_argument("Matrix dimensions do not match for multiplication");
+        throw std::invalid_argument("Matrix dimensions do not match for matrix multiplication");
     }
     std::vector<float> new_data(mata.rows*matb.cols);
     for(int i=0; i<mata.rows*matb.cols; i++){
@@ -109,4 +109,46 @@ Matrix matmul(const Matrix &mata, const Matrix &matb) {
         new_data[i] = vec_dot(row_data, col_data);
     }
     return Matrix(mata.rows, matb.cols, new_data);
+}
+
+Matrix eyen(int n) {
+    std::vector<float> data(n*n, 0);
+    for(int i=0; i<n; i++) {
+        data[i*n + i] = 1;
+    }
+    return Matrix(n, n, data);
+}
+
+Matrix matcat(const Matrix &mata, const Matrix &matb, int axis) {
+    if(axis == 0) {
+        if(mata.cols != matb.cols) {
+            throw std::invalid_argument("Matrix dimensions do not match for concatenation");
+        }
+        std::vector<float> new_data((mata.rows + matb.rows) * mata.cols);
+        for(int i=0; i<mata.rows*mata.cols; i++) {
+            new_data[i] = mata.data[i];
+        }
+        for(int i=0; i<matb.rows*matb.cols; i++) {
+            new_data[mata.rows*mata.cols + i] = matb.data[i];
+        }
+        return Matrix(mata.rows + matb.rows, mata.cols, new_data);
+    }
+    else if(axis == 1) {
+        if(mata.rows != matb.rows) {
+            throw std::invalid_argument("Matrix dimensions do not match for concatenation");
+        }
+        std::vector<float> new_data(mata.rows * (mata.cols + matb.cols));
+        for(int i=0; i<mata.rows; i++) {
+            for(int j=0; j<mata.cols; j++) {
+                new_data[i*(mata.cols + matb.cols) + j] = mata.data[i*mata.cols + j];
+            }
+            for(int j=0; j<matb.cols; j++) {
+                new_data[i*(mata.cols + matb.cols) + mata.cols + j] = matb.data[i*matb.cols + j];
+            }
+        }
+        return Matrix(mata.rows, mata.cols + matb.cols, new_data);
+    }
+    else {
+        throw std::invalid_argument("Invalid axis for concatenation");
+    }
 }
