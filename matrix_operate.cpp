@@ -170,6 +170,6 @@ Matrix inverse(const Matrix &mat) {
     }
     int n = mat.rows;
     std::vector<float> data(n*n, 0);
-    
+    //TODO: not implemented!
     return Matrix(n, n, data);
 }
