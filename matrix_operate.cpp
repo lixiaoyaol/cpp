@@ -152,3 +152,24 @@ Matrix matcat(const Matrix &mata, const Matrix &matb, int axis) {
         throw std::invalid_argument("Invalid axis for concatenation");
     }
 }
+
+float trace(const Matrix &mat) {
+    if(mat.rows != mat.cols) {
+        throw std::invalid_argument("Matrix is not square for trace");
+    }
+    float sum = 0;
+    for(int i=0; i<mat.rows; i++) {
+        sum += mat.data[i*mat.cols + i];
+    }
+    return sum;
+}
+
+Matrix inverse(const Matrix &mat) {
+    if(mat.rows != mat.cols) {
+        throw std::invalid_argument("Matrix is not square for inversion");
+    }
+    int n = mat.rows;
+    std::vector<float> data(n*n, 0);
+    
+    return Matrix(n, n, data);
+}
