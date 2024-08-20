@@ -138,6 +138,41 @@ void Matrix::setcol(int j, const std::vector<float> &col) {
     }
 }
 
+Matrix Matrix::getblock(int row1, int row2, int col1, int col2) const {
+    if(row1 < 0 || row1 >= rows || row2 < 0 || row2 >= rows || col1 < 0 || col1 >= cols || col2 < 0 || col2 >= cols) {
+        throw std::out_of_range("Matrix index out of range at getblock()");
+    }
+    if(row1 > row2 || col1 > col2) {
+        throw std::invalid_argument("Invalid block range for getblock()");
+    }
+    std::vector<float> block_data;
+    block_data.reserve((row2-row1+1)*(col2-col1+1));
+    for(int i=row1; i<=row2; i++) {
+        for(int j=col1; j<=col2; j++) {
+            block_data.push_back(data[i*cols + j]);
+        }
+    }
+    return Matrix(row2-row1+1, col2-col1+1, block_data);
+   
+}
+
+void Matrix::setblock(int row1, int row2, int col1, int col2, const Matrix &block) {
+    if(row1 < 0 || row1 >= rows || row2 < 0 || row2 >= rows || col1 < 0 || col1 >= cols || col2 < 0 || col2 >= cols) {
+        throw std::out_of_range("Matrix index out of range at setblock()");
+    }
+    if(row1 > row2 || col1 > col2) {
+        throw std::invalid_argument("Invalid block range for setblock()");
+    }
+    if(block.rows != row2-row1+1 || block.cols != col2-col1+1) {
+        throw std::invalid_argument("Block dimensions do not match matrix block range for setblock()");
+    }
+    for(int i=row1; i<=row2; i++) {
+        for(int j=col1; j<=col2; j++) {
+            data[i*cols + j] = block.data[(i-row1)*(col2-col1+1) + (j-col1)];
+        }
+    }
+}
+
 Matrix::~Matrix()
 {
     // std::cout << "hha" << std::endl;

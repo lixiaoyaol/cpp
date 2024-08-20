@@ -37,10 +37,9 @@ public:
     std::vector<float> getcol(int j) const;
     void setrow(int i, const std::vector<float> &row);
     void setcol(int j, const std::vector<float> &col);
+    Matrix getblock(int row1, int row2, int col1, int col2) const;
+    void setblock(int row1, int row2, int col1, int col2, const Matrix &block);
 
-    //TODO: NotInplemented
-    // Matrix getblock(int row1, int row2, int col1, int col2) const;
-    // void setblock(int row1, int col1, const Matrix &block);
 
     ~Matrix();
 };
