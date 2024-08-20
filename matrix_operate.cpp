@@ -76,9 +76,66 @@ Matrix Matrix::transpose() const {
 
 float& Matrix::operator()(int i, int j) {
     if(i < 0 || i >= rows || j < 0 || j >= cols) {
-        throw std::out_of_range("Matrix index out of range");
+        throw std::out_of_range("Matrix index out of range at ()");
     }
     return data[i*cols + j];
+}
+
+float Matrix::at(int i, int j) const {
+    if(i < 0 || i >= this->rows || j < 0 || j >= this->cols) {
+        throw std::out_of_range("Matrix index out of range at at()");
+    }
+    return this->data[i*this->cols + j];
+}
+
+void Matrix::set(int i, int j, float val) {
+    if(i < 0 || i >= rows || j < 0 || j >= cols) {
+        throw std::out_of_range("Matrix index out of range at set()");
+    }
+    data[i*cols + j] = val;
+}
+
+std::vector<float> Matrix::getrow(int i) const {
+    if(i < 0 || i >= rows) {
+        throw std::out_of_range("Matrix index out of range at getrow()");
+    }
+    return std::vector<float>(data.begin() + i*cols, data.begin() + (i+1)*cols);
+}
+
+std::vector<float> Matrix::getcol(int j) const {
+    if(j < 0 || j >= cols) {
+        throw std::out_of_range("Matrix index out of range at getcol()");
+    }
+    std::vector<float> col_data;
+    col_data.reserve(rows);
+    for(int i=0; i<rows; i++) {
+        col_data.push_back(data[i*cols + j]);
+    }
+    return col_data;
+}
+
+void Matrix::setrow(int i, const std::vector<float> &row) {
+    if(i < 0 || i >= rows) {
+        throw std::out_of_range("Matrix index out of range at setrow()");
+    }
+    if(row.size() != cols) {
+        throw std::invalid_argument("Row size does not match matrix column size for setrow()");
+    }
+    for(int j=0; j<cols; j++) {
+        data[i*cols + j] = row[j];
+    }
+}
+
+void Matrix::setcol(int j, const std::vector<float> &col) {
+    if(j < 0 || j >= cols) {
+        throw std::out_of_range("Matrix index out of range at setcol()");
+    }
+    if(col.size() != rows) {
+        throw std::invalid_argument("Column size does not match matrix row size for setcol()");
+    }
+    for(int i=0; i<rows; i++) {
+        data[i*cols + j] = col[i];
+    }
 }
 
 Matrix::~Matrix()

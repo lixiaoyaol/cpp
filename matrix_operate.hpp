@@ -18,6 +18,7 @@ public:
 public:
     Matrix(int rows, int cols, const std::vector<float> &data);
 
+    //operator overload
     friend std::ostream& operator<<(std::ostream& os, const Matrix &mat);
 
     Matrix operator+(const Matrix &mat) const;
@@ -27,7 +28,19 @@ public:
     Matrix operator*(const Matrix &mat) const;
     float& operator() (int i, int j);
 
+    //Matrix class functions
     Matrix transpose() const;
+
+    float at(int i, int j) const;
+    void set(int i, int j, float val);
+    std::vector<float> getrow(int i) const;
+    std::vector<float> getcol(int j) const;
+    void setrow(int i, const std::vector<float> &row);
+    void setcol(int j, const std::vector<float> &col);
+
+    //TODO: NotInplemented
+    // Matrix getblock(int row1, int row2, int col1, int col2) const;
+    // void setblock(int row1, int col1, const Matrix &block);
 
     ~Matrix();
 };

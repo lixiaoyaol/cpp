@@ -45,9 +45,26 @@ int main()
     vector<float> data={1, 2, 3, 4};
     Matrix mat(2, 2, data);
     // cout << trace(mat);
-    cout << mat(1,1) << endl;
+    // cout << mat(1,1) << endl;
 
-    cout << inverse(mat) << endl;
+    // cout << inverse(mat) << endl;
+    cout << mat.at(1, 1) << endl;
+    mat.set(1,1, 2.5);
+    cout << mat.at(1, 1) << endl;
+    cout << mat.getrow(0)[0] << " " << mat.getrow(0)[1] << endl;
+    cout << mat.getrow(1)[0] << " " << mat.getrow(1)[1] <<endl;
+    cout << mat.getcol(0)[0] << " " << mat.getcol(0)[1] << endl;
+    cout << mat.getcol(1)[0] << " " << mat.getcol(1)[1] <<endl;
+
+    cout << endl;
+
+    vector<float> row = {8, 8};
+    mat.setrow(0, row);
+    cout << mat.getrow(0)[0] << " " << mat.getrow(0)[1] << endl;
+
+    vector<float> col = {9, 9};
+    mat.setcol(0, col);
+    cout << mat.getcol(0)[0] << " " << mat.getcol(0)[1] << endl;
 
 
     return 0;
