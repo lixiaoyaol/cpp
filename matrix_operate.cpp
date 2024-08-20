@@ -270,6 +270,7 @@ Matrix inverse(const Matrix &mat) {
     int n = mat.rows;
     std::vector<float> data(n*n, 0);
     //TODO: not implemented!
+    //在将矩阵三角化的同时，可以求出行列式的值
     Matrix mate = eyen(n);
     Matrix matab = matcat(mat, mate, 1);
     // for(int i=1; i<n; i++) {
