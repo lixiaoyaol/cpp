@@ -279,18 +279,18 @@ Matrix inverse(const Matrix &mat) {
 
         for(int i=k+1; i<n; i++) {
             float temp = matab.at(i,k) / matab.at(k,k);
-            matab.setrow(i, vec_sub(matab.getrow(i), vec_scalar_multiply(matab.getrow(k), temp)));
+            matab.setrow(i, vec_sub(matab.getrow(i), vec_numx(matab.getrow(k), temp)));
         }
     }
 
     for(int k=n-1; k>=1; k--) {
-        matab.setrow(k, vec_scalar_multiply(matab.getrow(k), 1/matab.at(k,k)));
+        matab.setrow(k, vec_numx(matab.getrow(k), 1/matab.at(k,k)));
         for(int j=k-1; j>=0; j--) {
-            matab.setrow(j, vec_sub(matab.getrow(j), vec_scalar_multiply(matab.getrow(k), matab.at(j,k))));
+            matab.setrow(j, vec_sub(matab.getrow(j), vec_numx(matab.getrow(k), matab.at(j,k))));
         }
     }
 
-    matab.setrow(0, vec_scalar_multiply(matab.getrow(0), 1/matab.at(0,0)));
+    matab.setrow(0, vec_numx(matab.getrow(0), 1/matab.at(0,0)));
 
     Matrix inva = matab.getblock(0, n-1, n, 2*n-1);
 
