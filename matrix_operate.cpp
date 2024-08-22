@@ -1,5 +1,6 @@
 /*Author: libofeng, Mail: bf_li@qq.com
  *All rights reserved*/
+#include "vector_operate.hpp"
 #include "matrix_operate.hpp"
 
 
@@ -179,16 +180,6 @@ Matrix::~Matrix()
 }
 //Matrix class functions end
 
-float vec_dot(const std::vector<float> &vec1, const std::vector<float> &vec2) {
-    if(vec1.size() != vec2.size()) {
-        throw std::invalid_argument("Vector dimensions do not match for vector product");
-    }
-    float res = 0;
-    for(int i=0; i<vec1.size(); i++) {
-        res += vec1[i] * vec2[i];
-    }
-    return res;
-}
 
 Matrix matmul(const Matrix &mata, const Matrix &matb) {
     if(mata.cols != matb.rows) {
@@ -263,22 +254,45 @@ float trace(const Matrix &mat) {
     return sum;
 }
 
+
+//在将矩阵三角化的同时，可以求出行列式的值
 Matrix inverse(const Matrix &mat) {
     if(mat.rows != mat.cols) {
         throw std::invalid_argument("Matrix is not square for inversion");
     }
     int n = mat.rows;
-    std::vector<float> data(n*n, 0);
-    //TODO: not implemented!
-    //在将矩阵三角化的同时，可以求出行列式的值
     Matrix mate = eyen(n);
     Matrix matab = matcat(mat, mate, 1);
-    // for(int i=1; i<n; i++) {
-    //     float elmax = abs(mat)
-    // }
+    for(int k=0; k<n; k++) {
+        float elmax = abs(mat.at(k,k));
+        int id_max = k;
+        for(int i=k+1; i<n; i++) {
+            if(abs(mat.at(i,k)) > abs(elmax)) {
+                elmax = matab.at(i,k);
+                id_max = i;
+            }
+        }
+        std::vector<float> vtemp1 = matab.getrow(k);
+        std::vector<float> vtemp2 = matab.getrow(id_max);
+        matab.setrow(k, vtemp2);
+        matab.setrow(id_max, vtemp1);
 
-    // std::cout << matab <<std::endl;
+        for(int i=k+1; i<n; i++) {
+            float temp = matab.at(i,k) / matab.at(k,k);
+            matab.setrow(i, vec_sub(matab.getrow(i), vec_scalar_multiply(matab.getrow(k), temp)));
+        }
+    }
 
+    for(int k=n-1; k>=1; k--) {
+        matab.setrow(k, vec_scalar_multiply(matab.getrow(k), 1/matab.at(k,k)));
+        for(int j=k-1; j>=0; j--) {
+            matab.setrow(j, vec_sub(matab.getrow(j), vec_scalar_multiply(matab.getrow(k), matab.at(j,k))));
+        }
+    }
 
-    return Matrix(n, n, data);
+    matab.setrow(0, vec_scalar_multiply(matab.getrow(0), 1/matab.at(0,0)));
+
+    Matrix inva = matab.getblock(0, n-1, n, 2*n-1);
+
+    return inva;
 }
