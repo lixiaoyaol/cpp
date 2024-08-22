@@ -44,7 +44,6 @@ public:
     ~Matrix();
 };
 
-float vec_dot(const std::vector<float> &vec1, const std::vector<float> &vec2);
 Matrix matmul(const Matrix &mata, const Matrix &matb);
 Matrix eyen(int n);
 Matrix matcat(const Matrix &mata, const Matrix &matb, int axis);
