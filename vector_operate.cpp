@@ -1,5 +1,6 @@
 #include "vector_operate.hpp"
 
+
 void print_vec(std::vector<float> &vec) {
     for(int i=0; i<vec.size(); i++) {
         std::cout << vec[i] << " ";

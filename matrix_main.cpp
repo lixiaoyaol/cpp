@@ -5,6 +5,7 @@
 #include<vector>
 #include<string>
 #include "matrix_operate.hpp"
+#include "vector_operate.hpp"
 
 using namespace std;
 
@@ -42,12 +43,12 @@ int main()
     // cout << mat2 << endl;
     // cout << matcat(mat1, mat2, 0) << endl;
     // cout << matcat(mat1, mat2, 1) << endl;
-    vector<float> data={3, 2, 1, -10, -3, 0, -7, -5, -3};
-    Matrix mat(3, 3, data);
+    // vector<float> data={3, 2, 1, -10, -3, 0, -7, -5, -3};
+    // Matrix mat(3, 3, data);
     // cout << trace(mat);
     // cout << mat(1,1) << endl;
 
-    cout << inverse(mat) << endl;
+    // cout << inverse(mat) << endl;
     // cout << mat.at(1, 1) << endl;
     // mat.set(1,1, 2.5);
     // cout << mat.at(1, 1) << endl;
@@ -65,6 +66,10 @@ int main()
     // vector<float> col = {9, 9};
     // mat.setcol(0, col);
     // cout << mat.getcol(0)[0] << " " << mat.getcol(0)[1] << endl;
+
+    vector<int> data={3, 2, 1, -10, -3, 0, -7, -5, -3};
+
+    cout << data << endl;
 
 
     return 0;
